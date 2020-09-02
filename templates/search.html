@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} {% endblock title %}
+
+{% block blogactive %}active{% endblock blogactive %}
+
+{% block body %} 
+
+	<h2> Search posts</h2>
+{% if search_post|length < 1 %}
+<p>no result found</p>
+<p>Your search - <b>{{search_item}}</b> - did not match any documents.</p>
+
+<div>Suggestions</div>
+<ul>
+	<li>Make sure that all words are spelled correctly.</li>
+	<li>Try different keywords.</li>
+	<li>Try more general keywords.</li>
+</ul>
+{% endif %}
+{% for item in search_post %}
+
+<div class="container">
+
+<div class="jumbotron">
+  <h4>{{item.title}}</h4>
+  <p class="lead">{{item.content|truncatechars:200}}</p>
+  <hr class="my-4">
+  <p>{{item.author}}</p>
+  <a class="btn btn-primary btn-lg" href="/blog/{{item.slug}}" role="button">Learn more</a>
+</div>	
+</div>
+{% endfor %}
+
+
+{% endblock body %}

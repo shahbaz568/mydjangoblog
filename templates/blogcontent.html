@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} {% endblock title %}
+
+{% block js %}
+<script type="text/javascript">
+	let preview = document.getElemenstByClass('preview');
+	Array().from(preview).forEach((element)=>{
+       element.innerHTML = element.innerText;
+	})
+</script>
+{% endblock js %}
+{% block blogactive %}active{% endblock blogactive %}
+
+{% block body %} 
+
+	<h1 class="text-center">POST</h1>
+{% for item in data %}
+
+<div class="container">
+
+<div class="jumbotron">
+  <h2>{{item.title}}</h2>
+  <p class="lead"><div class="preview">{{item.content|truncatechars:200|safe}}</div></p>
+  <hr class="my-4">
+  <p>{{item.author}}</p>
+  <a class="btn btn-primary" href="/blog/{{item.slug}}" role="button">Learn more</a>
+</div>	
+</div>
+{% endfor %}
+
+
+{% endblock body %}
